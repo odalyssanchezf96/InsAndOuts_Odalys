@@ -1,4 +1,9 @@
+//Odalys Sanchez
+//Day to night
 
+import processing.sound.*;
+
+SoundFile file;
 PImage sky1;
 PImage sky3;
 PImage night1;
@@ -21,6 +26,7 @@ int [] sparkleY = new int [50];
 boolean button = false;
 
 
+
 void setup(){
   size(1080, 720);
   sky1 = loadImage("sky1.jpg");
@@ -34,6 +40,8 @@ void setup(){
   font2 = createFont("SansitaSwashed-Regular.ttf", 30);
   textFont(font1);
   textFont(font2);
+  file = new SoundFile(this, "Calming.wav");
+  file.loop();
   
     for (int i = 0; i < sparkleX.length; i++){
     sparkleX[i] = int (random(0, 1080));
