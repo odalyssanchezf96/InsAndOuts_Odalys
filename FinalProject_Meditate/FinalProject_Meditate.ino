@@ -1,4 +1,3 @@
-int val;
 int photocellPin = 0;     
 int photocellReading;     
 int RLEDpin1 = 13; // first RGB LED
@@ -11,7 +10,7 @@ int RLEDpin3 = 7; //Third RGB LED
 int GLEDpin3 = 6; 
 int BLEDpin3 = 5;  
 int RandomNum;
-int PhotocellValue;
+int photocellValue;
 
 void setup() {
   // RGB LED LIGHTS
@@ -24,31 +23,29 @@ void setup() {
   pinMode(RLEDpin3, OUTPUT); //THIRD RGB
   pinMode(GLEDpin3, OUTPUT);
   pinMode(BLEDpin3, OUTPUT); 
-  randomSeed(analogRead(0)); 
+ // randomSeed(analogRead(0)); 
 
 //photocell
   Serial.begin(9600);
-  photocellReading = analogRead(photocellPin);  
-  Serial.print("Analog reading = ");
-  Serial.println(photocellReading); 
-  //photocellReading = 1023 - photocellReading;
-  PhotocellValue = map(photocellReading, 0, 1023, 0, 255);
+
+
 
 }
 
 void loop() {
-  val = analogRead(photocellPin); //read sensor and assign to variable called val
-  val = val / 4;
-  Serial.write(val);
+  photocellReading = analogRead(photocellPin);  
+  photocellValue = map(photocellReading, 0, 1023, 0, 255);
+  Serial.println(photocellValue);
+  Serial.write(photocellValue);
   RandomNum = random(0,255);
 
-  if(PhotocellValue > 0 && PhotocellValue < 75){
+  if(photocellValue > 0 && photocellValue < 75){
   RGB_color(RandomNum, RandomNum, RandomNum);
   delay(1000);
-  } else if(PhotocellValue > 75 && PhotocellValue < 150){
+  } else if(photocellValue > 75 && photocellValue < 150){
   RGB_color2(RandomNum, RandomNum, RandomNum);
   delay(1000);
-  } else if(PhotocellValue > 150 && PhotocellValue < 255){
+  } else if(photocellValue > 150 && photocellValue < 255){
   RGB_color3(RandomNum, RandomNum, RandomNum);  
   delay(1000);  
   }
