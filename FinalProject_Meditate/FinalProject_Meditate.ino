@@ -23,7 +23,7 @@ void setup() {
   pinMode(RLEDpin3, OUTPUT); //THIRD RGB
   pinMode(GLEDpin3, OUTPUT);
   pinMode(BLEDpin3, OUTPUT); 
- // randomSeed(analogRead(0)); 
+  randomSeed(analogRead(0)); 
 
 //photocell
   Serial.begin(9600);
@@ -33,23 +33,46 @@ void setup() {
 }
 
 void loop() {
-  photocellReading = analogRead(photocellPin);  
+  photocellReading = analogRead(photocellPin);
   photocellValue = map(photocellReading, 0, 1023, 0, 255);
-  Serial.println(photocellValue);
-  Serial.write(photocellValue);
-  RandomNum = random(0,255);
+  delay(100);  //keep this small delay in
+  //Serial.println(photocellValue);
+ Serial.write(photocellValue);
+ RandomNum = random(0,255);
 
-  if(photocellValue > 0 && photocellValue < 75){
-  RGB_color(RandomNum, RandomNum, RandomNum);
-  delay(1000);
-  } else if(photocellValue > 75 && photocellValue < 150){
+
+  if (photocellValue > 0 && photocellValue < 35){
+  RGB_color(LOW, LOW, LOW);
+  RGB_color2(LOW, LOW, LOW);
+  RGB_color3(LOW, LOW, LOW);
+  delay(10);
+  } else if(photocellValue > 35 && photocellValue < 75){
   RGB_color2(RandomNum, RandomNum, RandomNum);
-  delay(1000);
-  } else if(photocellValue > 150 && photocellValue < 255){
+  delay(10);
+  } else if(photocellValue > 100 && photocellValue < 115){
   RGB_color3(RandomNum, RandomNum, RandomNum);  
-  delay(1000);  
-  }
+  delay(10);  
+  } else if(photocellValue > 115 && photocellValue < 135){
+  RGB_color(RandomNum, RandomNum, RandomNum);  
+  delay(10);  
+  } else if(photocellValue > 135 && photocellValue < 165){
+  RGB_color2(RandomNum, RandomNum, RandomNum);  
+  delay(10);  
+  } else if(photocellValue > 165 && photocellValue < 195){
+  RGB_color3(RandomNum, RandomNum, RandomNum);  
+  delay(10);
+  } else if(photocellValue > 195 && photocellValue < 210){
+  RGB_color(RandomNum, RandomNum, RandomNum);  
+  delay(10);  
+  }  else if(photocellValue > 210 && photocellValue < 230){
+  RGB_color2(RandomNum, RandomNum, RandomNum);  
+  delay(10);  
+  } else if(photocellValue > 230 && photocellValue < 255){
+  RGB_color3(RandomNum, RandomNum, RandomNum);  
+  delay(10);
+  } 
 }
+
 
 void RGB_color(int red_value, int green_value, int blue_value)
  {
