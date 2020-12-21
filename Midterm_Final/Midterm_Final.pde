@@ -1,8 +1,6 @@
 //Odalys Sanchez
 //Day to night
-
 import processing.sound.*;
-
 SoundFile file;
 PImage sky1;
 PImage sky3;
@@ -24,9 +22,6 @@ int h = 80;
 int [] sparkleX = new int [50];
 int [] sparkleY = new int [50];
 boolean button = false;
-
-
-
 void setup(){
   size(1080, 720);
   sky1 = loadImage("sky1.jpg");
@@ -48,9 +43,8 @@ void setup(){
     sparkleY[i] = int (random(0, 720));
   }
 }
-
 void draw(){
-  println(mouseX, mouseY);
+  //println(mouseX, mouseY);
   
   if(state == "beginning"){
     startGame();
@@ -63,21 +57,28 @@ void draw(){
   if (button){
     startGame();
   }
+  
+  println(state);
+  println(button);
 }
-
-
 void mousePressed(){
   if(state == "beginning"){
     state = "game";
+    if (button == true){ //
+      button= false; //
+      
+    }
   } else if (state == "game"){
     state = "last scene";
   }
   
-  if(mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
-    button = !button;
+  if(state == "last scene" && mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h){
+    button = true; //
+    pointX = 215; //
+    moonX = 620; //
+    state = "beginning"; //
   }
 }
-
 void sun(int pointY, int n, int m){
   fill(252, 224, 0);  
   if(pointX + move <= width/2){
@@ -86,7 +87,6 @@ void sun(int pointY, int n, int m){
   noStroke();
   ellipse(pointX + move, pointY, n, m);
 }
-
 void moon (){
   if(moonX + move <= 940){
     moonX += move;
@@ -95,7 +95,6 @@ void moon (){
   fill(162);
   ellipse(moonX + move, 220, 250, 250);
 }
-
 void secondScene(){
   
     image(sky3, 0, 0, 1080, 720);
@@ -103,7 +102,6 @@ void secondScene(){
     fill(255, 225, 160);
     noStroke();
     image(table, 140, 380, 900, 600);
-
     
     sun(220, 250, 250);
      
@@ -121,7 +119,6 @@ void secondScene(){
       text("Press screen to see more.. ", 100, 450);
     }
 }
-
 void thirdScene(){
   image(night1, 0, 0, 1080, 720);
   
@@ -156,14 +153,12 @@ void thirdScene(){
   }
   }
   
-
   fill (126, 10, 9);
   rect(x, y, w, h);
   fill(255);
   textFont(font2);
   text("Start Again", 40, 80);
 }
-
 void candles(){ 
   //blue candle
   stroke(1);
@@ -186,7 +181,6 @@ void candles(){
   line(594, 364, 594, 340);
   line(650, 393, 650, 371);
 }
-
 void startGame(){
   image(sky1, 0, 0, 1080, 720);
   fill(252, 224, 0); 
